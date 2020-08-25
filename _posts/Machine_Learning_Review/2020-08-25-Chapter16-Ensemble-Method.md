@@ -25,8 +25,8 @@ mathjax: true
      * Given: 
        Learner $L$, training set $D = \{(x_1,y_1) \ldots (x_m,y_m)\}$
      * Action:
-       for $i \leftarrow 1$ to $T$:
-       $\quad\quad$ $D^{(i)} \leftarrow m$ instances randomly drawn <u>with replacement</u> from $D$.
+       for $i \leftarrow 1$ to $T$:  
+       $\quad\quad$ $D^{(i)} \leftarrow m$ instances randomly drawn <u>with replacement</u> from $D$.  
        $\quad\quad$ $h_i \leftarrow$ model learned using $L$ on $D^{(i)}$
    * Predition:
      * Classification:
@@ -58,20 +58,20 @@ mathjax: true
 * Algorithm of AdaBoost
   * Given:
     Learner $L$, # stages $T$ (or say iteration number), training set $D = \{(x_1,y_1) \ldots (x_m,y_m)\}$
-  * Pseudocode: ($i$ denotes the $i^{th}$ instance)
-    for all $i: w_1(i) \leftarrow \frac{1}{m}$  $\quad$// initialize instance weights
-    for $t\leftarrow 1$ to $T$ do
-    $\quad\quad$for all $i: p_t(i) \leftarrow \frac{w_t(i)}{\sum_jw_t(j)}$ $\quad$// normalize weights
-    $\quad\quad$$h_t \leftarrow$ model learned using $L$ on $D$ and $p_t$
-    $\quad\quad$$\epsilon_t \leftarrow \sum_ip_t(i)(1-\delta(h_t(x_i), y_i)$ $\quad$// calculate weighted error
-    $\quad\quad$if $\epsilon_t>0.5$ then
-    $\quad\quad$$\quad\quad$$T\leftarrow t-1$
-    $\quad\quad$$\quad\quad$break
-    $\quad\quad$$\beta_t \leftarrow \frac{\epsilon_t}{1-\epsilon_t}$ $\quad$ // lower error, smaller $\beta_t$
-    $\quad\quad$for all $i$ where $h_t(x_i) = y_i$ $\quad$ // downweight correct examples
-    $\quad\quad$$\quad\quad$$w_{t+l}(i) \leftarrow w_t(i)\beta_t$
-    return:
-    $\quad\quad$ $h(x) = \arg\max_y\sum_{t=1}^T(\log{\frac{1}{\beta_t}})\delta(h_t(x), y)$
+  * Pseudocode: ($i$ denotes the $i^{th}$ instance)  
+    for all $i: w_1(i) \leftarrow \frac{1}{m}$  $\quad$// initialize instance weights  
+    for $t\leftarrow 1$ to $T$ do  
+    $\quad\quad$for all $i: p_t(i) \leftarrow \frac{w_t(i)}{\sum_jw_t(j)} \quad$// normalize weights  
+    $\quad\quad h_t \leftarrow$ model learned using $L$ on $D$ and $p_t$  
+    $\quad\quad$ $\epsilon_t \leftarrow \sum_ip_t(i)(1-\delta(h_t(x_i), y_i)$   $\quad$// calculate weighted error  
+    $\quad\quad$if $\epsilon_t>0.5$ then  
+    $\quad\quad \quad\quad T\leftarrow t-1$  
+    $\quad\quad \quad\quad$break  
+    $\quad\quad \beta_t \leftarrow \frac{\epsilon_t}{1-\epsilon_t} \quad$ // lower error, smaller $\beta_t$  
+    $\quad\quad$for all $i$ where $h_t(x_i) = y_i \quad$ // downweight correct examples  
+    $\quad\quad$$\quad\quad w_{t+l}(i) \leftarrow w_t(i)\beta_t$  
+    return:  
+    $\quad\quad$ $h(x) = \arg\max_y\sum_{t=1}^T(\log{\frac{1}{\beta_t}})\delta(h_t(x), y)$  
   * Comments:
     * $\delta()$ is the error function, $E(h(x), i, y) = e^{-y_ih(x_i)}$
     * Implementing weighted instances with AdaBoost
@@ -91,14 +91,14 @@ mathjax: true
      * Given: 
        Candidate feature splits $F$, training set $D = \{(x_1,y_1) \ldots (x_m,y_m)\}$
      * Action:
-       for $i \leftarrow 1$ to $T$:
-       $\quad\quad$ $D^{(i)} \leftarrow m$ instances randomly drawn <u>with replacement</u> from $D$.
-       $\quad\quad$ $h_i \leftarrow$ *<u>randomized</u>* decision tree learned with $F, D^{(i)}$
+       for $i \leftarrow 1$ to $T$:  
+       $\quad\quad D^{(i)} \leftarrow m$ instances randomly drawn <u>with replacement</u> from $D$.  
+       $\quad\quad h_i \leftarrow$ *<u>randomized</u>* decision tree learned with $F, D^{(i)}$
    * Randomized decision tree learning:
-     * To select a split at a node 
-     $\quad\quad$ $R ←$ randomly select (without replacement) $f$ feature splits from $F$ (where $f \approx \sqrt{|F|}$)
+     * To select a split at a node  
+     $\quad\quad R ←$ randomly select (without replacement) $f$ feature splits from $F$ (where $f \approx \sqrt{|F|}$)  
      $\quad\quad$ choose the best feature split in $R$.
      * do not prune trees.
    * Predition:
-     * Classification/Regression:
+     * Classification/Regression:  
        As in bagging
