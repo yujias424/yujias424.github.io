@@ -31,7 +31,7 @@ $\quad\quad$return subtree rooted
 2.  Splits on numeric features use a threshold.
 
 ***Pseudocode of Candidate splits on numeric features***  
-**\#** *<u>Run this subroutine for each numeric feature at each node of DT induction</u>*
+**\#** *<u>Run this subroutine for each numeric feature at each node of DT induction</u>*  
 **DetermineCandidateNumericSplits**(set of training instances $D$, feature $X_i$):  
 $\quad\quad C$ = { } **\#** *<u>initialize set of candidate splits for feature $X_i$</u>*  
 $\quad\quad S$ = partition instances in $D$ into sets $s_1 \cdots s_V$ where the instances in each set have the same value for $X_i$  
