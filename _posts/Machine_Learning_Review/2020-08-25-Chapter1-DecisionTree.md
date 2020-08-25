@@ -67,11 +67,11 @@ $$
 
 **Information Gain (a.k.a mutual information)**  
 
-* choosing splits in ID3: **select the split S that most reduces the conditional entropy of Y for training set D**  
-$$
-InfoGain(D,S) = H_D(Y) - H_D(Y|S)
-$$  
-$D$ indicates that we’re calculating probabilities using the specific sample $D$
+*   choosing splits in ID3: **select the split S that most reduces the conditional entropy of Y for training set D**  
+    $$
+    InfoGain(D,S) = H_D(Y) - H_D(Y|S)
+    $$  
+    $D$ indicates that we’re calculating probabilities using the specific sample $D$
 
 **Gain Ratio**  
 Information gain will be biased towards tests with many outcomes, and **Gain ratio** is introduced to address this limitation.
@@ -120,14 +120,14 @@ Leaves have functions that predict numeric values instead of class labels.
 
 **CART**
 
-* CART does least squares regression which tries to minimize  
-$$
-\begin{aligned}
-&\,\,\,\,\,\,\,\,\,\,\,\sum_{i=1}^{|D|}(y^{(i)} - \hat{y}^{(i)})^2 \\
-&= \sum_{L\in leaves}\sum_{i\in L}(y^{(i)} - \hat{y}^{(i)})^2
-\end{aligned}
-$$  
-* At each internal node, CART chooses the split that most reduces this quantity.
+*   CART does least squares regression which tries to minimize  
+    $$
+    \begin{aligned}
+    &\,\,\,\,\,\,\,\,\,\,\,\sum_{i=1}^{|D|}(y^{(i)} - \hat{y}^{(i)})^2 \\
+    &= \sum_{L\in leaves}\sum_{i\in L}(y^{(i)} - \hat{y}^{(i)})^2
+    \end{aligned}
+    $$  
+*   At each internal node, CART chooses the split that most reduces this quantity.
 
 **Probability estimation trees**  
 **Overview**  
