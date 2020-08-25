@@ -166,11 +166,11 @@ $\quad\quad$return $S_{best}$
 
 **EvaluateSplit**($D$, $C$, $S$):  
 $\quad\quad$if a split on $S$ separates instances by class (i.e. $H_D(Y|S) = 0$):  
-$\quad\quad \quad\quad$**\#** <u>*no need to split further*</u>  
+$\quad\quad \quad\quad$**\#** *<u>no need to split further</u>*  
 $\quad\quad \quad\quad$ return $H_D(Y) - H_D(Y|S)$  
 $\quad\quad$else:  
 $\quad\quad \quad\quad$for each outcome $k$ of $S$:  
-$\quad\quad \quad\quad$**\#** <u>*see what the splits at the next level would be*</u>  
+$\quad\quad \quad\quad$**\#** *<u>see what the splits at the next level would be</u>*  
 $\quad\quad D_k$ = subset of instances that have outcome k     
 $\quad\quad S_k$ = **OrdinaryFindBestSplit**($D_k$, $C$ – $S$)  
 $\quad\quad \quad\quad$**\#** *<u>return information gain that would result from this 2-level subtree</u>*  
