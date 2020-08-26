@@ -30,7 +30,7 @@ mathjax: true
     \end{aligned}
     $$
 
-*   For example, $l_2$ regularization. $R(\theta) \leq r$ can be expressed as $||\theta||^2_2\leq r^2$.  
+*   For example, $l_2$ regularization. $R(\theta) \leq r$ can be expressed as $\lvert\theta\lvert^2_2\leq r^2$.  
 
 **Regularization as soft constraint**
 *   The hard-constraint optimization is equivalent to soft-constraint  
@@ -63,22 +63,22 @@ mathjax: true
 **Regularization as soft constraint**
 *   Bayesian View: Everything will be regarded as a distribution.
 *   Prior over the hypotheses: $p(\theta)$
-*   Posterior over the hypotheses: $p(\theta| \{x_i, y_i\})$
-*   Likelihood: $p(\{x_i, y_i\}|\theta)$
+*   Posterior over the hypotheses: $p(\theta\lvert \{x_i, y_i\})$
+*   Likelihood: $p(\{x_i, y_i\}\lvert\theta)$
 *   Bayesian Rule:  
     
     $$
-    p(\theta|\{x_i, y_i\}) = \frac{p(\theta)p(\{x_i, y_i\}|\theta)}{p(\{x_i, y_i\})}
+    p(\theta\lvert\{x_i, y_i\}) = \frac{p(\theta)p(\{x_i, y_i\}\lvert\theta)}{p(\{x_i, y_i\})}
     $$
 
 *   Maximum A Posteriori (MAP):  
     
     $$
-    \max_\theta\log p(\theta|\{x_i, y_i\}) = \max_\theta\log p(\theta) + \log p(\{x_i, y_i\}|\theta)
+    \max_\theta\log p(\theta\lvert\{x_i, y_i\}) = \max_\theta\log p(\theta) + \log p(\{x_i, y_i\}\lvert\theta)
     $$
 
-    To be noticed, $\log p(\theta)$ is the **regularization** term and $\log p(\{x_i, y_i\}|\theta)$ is the **MLE loss** term.  
-*   Example: $l_2$ loss with $l_2$ regularization is correspond to a normal likelihood $p(x,y|\theta)$ and a normal prior $p(\theta)$.  
+    To be noticed, $\log p(\theta)$ is the **regularization** term and $\log p(\{x_i, y_i\}\lvert\theta)$ is the **MLE loss** term.  
+*   Example: $l_2$ loss with $l_2$ regularization is correspond to a normal likelihood $p(x,y\lvert\theta)$ and a normal prior $p(\theta)$.  
 
 **Three Views**  
 1.   Typical choice for optimization: soft-constraint.
@@ -103,7 +103,7 @@ mathjax: true
 **$l_2$ Regularization**  
 
 $$
-\min_\theta \hat{L}_R(\theta) = \hat{L}(\theta) + \frac{\alpha}{2}||\theta||^2_2
+\min_\theta \hat{L}_R(\theta) = \hat{L}(\theta) + \frac{\alpha}{2}\lvert\theta\lvert^2_2
 $$
 
 *   Effect on (stochastic) gradient descent 
@@ -140,7 +140,7 @@ $$
         \end{aligned}
         $$
 
-    *   Gradient of regularized objective ($\alpha\theta$ comes from the derivitive of the $l_2$ term, $\frac{\alpha}{2}||\theta||^2_2$)
+    *   Gradient of regularized objective ($\alpha\theta$ comes from the derivitive of the $l_2$ term, $\frac{\alpha}{2}\lvert\theta\lvert^2_2$)
         
         $$
         \nabla\hat{L_R}(\theta) \approx H(\theta - \theta^* ) + \alpha\theta
@@ -168,7 +168,7 @@ $$
 **$l_1$ Regularization**  
 
 $$
-\min_\theta \hat{L}_R(\theta) = \hat{L}(\theta) + \alpha||\theta||_1
+\min_\theta \hat{L}_R(\theta) = \hat{L}(\theta) + \alpha\lvert\theta\lvert_1
 $$
 
 *   Effect on (stochastic) gradient descent 
@@ -206,7 +206,7 @@ $$
     *   The regularized objective is (ignoring constants)
         
         $$
-        \hat{L_R}(\theta) \approx \sum_i\frac{1}{2}H_{ii}(\theta_i - \theta_i^* )^2 + \alpha|\theta_i|
+        \hat{L_R}(\theta) \approx \sum_i\frac{1}{2}H_{ii}(\theta_i - \theta_i^* )^2 + \alpha\lvert\theta_i\lvert
         $$
 
     *   The optimal $\theta_R^* \,$ approximate to,
@@ -223,7 +223,7 @@ $$
     *   Further assume that $H$ is diagonal
     *   Compact expression for the optimal $\theta_R^* \,$
         
-        $$(\theta_R^* )_ i \approx sign(\theta_i^* )\max\{|\theta_i^* | - \frac{\alpha}{H_{ii}},0\}$$
+        $$(\theta_R^* )_ i \approx sign(\theta_i^* )\max\{\lvert\theta_i^* \lvert - \frac{\alpha}{H_{ii}},0\}$$
     
 **Bayesian View**  
 Gaussian likelihood → squared error.  
@@ -240,7 +240,7 @@ Sigmoid likelihood → logistic loss.
     \begin{aligned}
     &\quad\quad\,\,\,\, L(f) = \mathbb{E}_{x,y,\epsilon}[f(x+\epsilon)-y]^2 = \mathbb{E}_{x,y,\epsilon}[f(x) + w^T\epsilon -y]^2\\
     &\implies L(f) = \mathbb{E}_{x,y,\epsilon}[f(x)-y]^2 + 2\mathbb{E}_{x,y,\epsilon}[w^T\epsilon(f(x)-y)]^2 + \mathbb{E}_{x,y,\epsilon}[w^T\epsilon]^2\\
-    &\implies L(f) = \mathbb{E}_{x,y,\epsilon}[f(x)-y]^2 + \lambda||w||^2
+    &\implies L(f) = \mathbb{E}_{x,y,\epsilon}[f(x)-y]^2 + \lambda\lvert w\lvert^2
     \end{aligned}
     $$
 
@@ -267,10 +267,10 @@ Sigmoid likelihood → logistic loss.
 *   Plug in loss function. 
     
     $$
-    L(f) \approx \mathbb{E}_{x,y,\epsilon}[f_{w}(x)-y]^2 + 2\mathbb{E}_{x,y,\epsilon}[(f_{w}(x)-y)\epsilon^T\nabla f_w(x)] + \eta\mathbb{E}||\nabla f_w(x)||^2
+    L(f) \approx \mathbb{E}_{x,y,\epsilon}[f_{w}(x)-y]^2 + 2\mathbb{E}_{x,y,\epsilon}[(f_{w}(x)-y)\epsilon^T\nabla f_w(x)] + \eta\mathbb{E}\lvert\nabla f_w(x)\lvert^2
     $$
 
-    *   Regularization term: $\eta\mathbb{E}||\nabla f_w(x)||^2$
+    *   Regularization term: $\eta\mathbb{E}\lvert\nabla f_w(x)\lvert^2$
     *   Expectation of $\epsilon^T$ equals 0.
     
 ##### Other types of regularization
