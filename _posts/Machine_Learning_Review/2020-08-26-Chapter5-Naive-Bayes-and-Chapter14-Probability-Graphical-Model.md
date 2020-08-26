@@ -11,7 +11,7 @@ mathjax: true
 Problem Setting:  
 *   Set of possible instances: $X$
 *   Unknown target function (concept): $f: X\rightarrow Y$
-*   Set of hypotheses (hypothesis class): $H = \{h|h:X\rightarrow Y\}$
+*   Set of hypotheses (hypothesis class): $H = \{h\lvert h:X\rightarrow Y\}$
 
 Given:  
 *   Training set of instances of unknown target function $f$, $(x^{(1)}, y^{(1)})$, $(x^{(2)}, y^{(2)})$, ... , $(x^{(m)}, y^{(m)})$.
@@ -22,7 +22,7 @@ Output:
 **Discriminative Approaches**
 *   Hypothesis $h \in H$ directly predicts the label $y$ given the features $x$  
     $$
-    y = h(x) \,\,\,or\,\,\,p(y|x)=h(x)
+    y = h(x) \,\,\,or\,\,\,p(y\lvert x)=h(x)
     $$
 *   Define a loss function $L(h)$ and find hypothesis with minimum loss.
     *   Probabilistic model is a special case, like finding MLE or MAP.
@@ -51,8 +51,8 @@ Suppose we have data $D = \{x^{(i)} \}^N_{i=1}$,
 
 $$
 \begin{aligned}
-&\theta^{MLE} = \arg\max_\theta \prod_{i=1}^Np(x^{(i)}|\theta) \\
-&\theta^{MAP} = \arg\max_\theta \prod_{i=1}^Np(x^{(i)}|\theta)p(\theta)
+&\theta^{MLE} = \arg\max_\theta \prod_{i=1}^Np(x^{(i)}\lvert \theta) \\
+&\theta^{MAP} = \arg\max_\theta \prod_{i=1}^Np(x^{(i)}\lvert \theta)p(\theta)
 \end{aligned}
 $$
 
@@ -77,22 +77,22 @@ To be noticed, the $p(\theta)$ in MAP is the prior distribution.
 
 ##### Naive Bayes
 **Generic Naive Bayes Model**  
-*   Support: Depends on the choice of **event model**, $P(X_k|Y)$.  
+*   Support: Depends on the choice of **event model**, $P(X_k\lvert Y)$.  
 *   Model: Product of **prior** and the event model.  
     $$
     \begin{aligned}
-    P(X,Y) &= P(Y)P(X|Y) \\
-    &= P(Y)\prod_{k=1}^KP(x_k|Y)
+    P(X,Y) &= P(Y)P(X\lvert Y) \\
+    &= P(Y)\prod_{k=1}^KP(x_k\lvert Y)
     \end{aligned}
     $$
 *   Training: Find the **class-conditional** MLE parameters  
-    *   For $P(Y)$, we find the MLE using all the data. For each $P(x_k|Y)$ we condition on the data with the corresponding.  
+    *   For $P(Y)$, we find the MLE using all the data. For each $P(x_k\lvert Y)$ we condition on the data with the corresponding.  
 *   Classification: Find the class that maximizes the posterior  
     $$
     \begin{aligned}
-    \hat{y} &= \arg\max_y p(y|X)) \,\,\,(Posterior)\\
-    &= \arg\max_y\frac{p(X|y)p(y)}{p(x)} \,\,\,(P(x) \,\,\,is\, fixed)\\
-    &= \arg\max_y p(X|y)p(y)
+    \hat{y} &= \arg\max_y p(y\lvert X)) \,\,\,(Posterior)\\
+    &= \arg\max_y\frac{p(X\lvert y)p(y)}{p(x)} \,\,\,(P(x) \,\,\,is\, fixed)\\
+    &= \arg\max_y p(X\lvert y)p(y)
     \end{aligned}
     $$
 
@@ -105,10 +105,10 @@ To be noticed, the $p(\theta)$ in MAP is the prior distribution.
     *   Each node denotes a random variable.  
     *   Each edge from $X$ to $Y$ represents that $X$ directly influences $Y$.  
     *   Formally: each variable X is independent of its non-descendants given its parents.  
-*   Each node $X$ has a conditional probability distribution (CPD) representing $P(X|Parents(X))$.  
+*   Each node $X$ has a conditional probability distribution (CPD) representing $P(X\lvert Parents(X))$.  
 *   BN provides a compact representation of a joint probability distribution, using chain rule.  
     $$
-    P(X_1, \cdots X_n) = P(X_1)\prod_{i=2}^n P(X_i|Parents(X_i))
+    P(X_1, \cdots X_n) = P(X_1)\prod_{i=2}^n P(X_i\lvert Parents(X_i))
     $$
 
 **Advantages**  
@@ -142,8 +142,8 @@ To be noticed, the $p(\theta)$ in MAP is the prior distribution.
 **Overview**  
 *   Maximum Likelihood Estimation (MLE)  
     *   Given a model structure (e.g. a Bayes net graph) $G$ and a set of data $D$.  
-    *   Set the model parameters $\theta$ to maximize $P(D|G, \theta)$.   
-*   i.e. make the data $D$ look as likely as possible under the model $P(D|G, \theta)$  
+    *   Set the model parameters $\theta$ to maximize $P(D\lvert G, \theta)$.   
+*   i.e. make the data $D$ look as likely as possible under the model $P(D\lvert G, \theta)$  
 
 **Parameter learning and MAP**  
 **Overview**  
@@ -206,11 +206,11 @@ variables
             \begin{aligned}
                 I(X; Y) &= \sum_{x\in\mathcal{X}, y\in\mathcal{Y}}P_{(X,Y)}(x,y)\log{\frac{P_{(X,Y)}(x,y)}{P_X(x)P_Y(y)}} \\
                 &= \sum_{x\in\mathcal{X}, y\in\mathcal{Y}}P_{(X,Y)}(x,y)\log{\frac{P_{(X,Y)}(x,y)}{P_X(x)}} - \sum_{x\in\mathcal{X}, y\in\mathcal{Y}}P_{(X,Y)}(x,y)\log{P_Y(y)} \\
-                &= \sum_{x\in\mathcal{X}, y\in\mathcal{Y}}P_X(x)P_{Y|X=x}(y)\log{P_{Y|X=x}(y)} - \sum_{x\in\mathcal{X}, y\in\mathcal{Y}}P_{(X,Y)}(x,y)\log{P_Y(y)} \\
-                &= \sum_{x\in\mathcal{X}}P_X(x)(\sum_{y\in\mathcal{Y}}P_{Y|X=x}(y)\log{P_{Y|X=x}(y)}) - \sum_{y\in\mathcal{Y}}(\sum_{x}P_{X,Y}(x,y))\log{P_Y(y)} \\
-                &= -\sum_{x\in\mathcal{X}}P(x)H(Y|X=x) - \sum_{y\in\mathcal{Y}}P_Y(y)\log{P_Y(y)}\\
-                &= -H(Y|X) + H(Y) \\
-                &= H(Y) - H(Y|X)
+                &= \sum_{x\in\mathcal{X}, y\in\mathcal{Y}}P_X(x)P_{Y\lvert X=x}(y)\log{P_{Y\lvert X=x}(y)} - \sum_{x\in\mathcal{X}, y\in\mathcal{Y}}P_{(X,Y)}(x,y)\log{P_Y(y)} \\
+                &= \sum_{x\in\mathcal{X}}P_X(x)(\sum_{y\in\mathcal{Y}}P_{Y\lvert X=x}(y)\log{P_{Y\lvert X=x}(y)}) - \sum_{y\in\mathcal{Y}}(\sum_{x}P_{X,Y}(x,y))\log{P_Y(y)} \\
+                &= -\sum_{x\in\mathcal{X}}P(x)H(Y\lvert X=x) - \sum_{y\in\mathcal{Y}}P_Y(y)\log{P_Y(y)}\\
+                &= -H(Y\lvert X) + H(Y) \\
+                &= H(Y) - H(Y\lvert X)
             \end{aligned}
             $$
     2.  Find maximum weight spanning tree (MST)
@@ -242,10 +242,10 @@ This decomposability allows us to
 One general approach for BN structure search  
 
 $$
-\arg\max_{G,\theta_G}\log P(D|G,\theta_G) - f(m)|\theta_G|
+\arg\max_{G,\theta_G}\log P(D\lvert G,\theta_G) - f(m)\lvert \theta_G\lvert 
 $$
 
-where the $f(m)|\theta_G|$ is the complexity penalty.  
+where the $f(m)\lvert \theta_G\lvert$ is the complexity penalty.  
 ***Akaike Informtion Criterion (AIC)***  
 
 $$
@@ -295,7 +295,7 @@ repeat
 $\quad$++$i$  
 
 $\quad$// restrict step  
-$\quad$select for each variable $X_j$ a set $C_j^i$ of candidate parents $(|C_j^i| \leq k)$  
+$\quad$select for each variable $X_j$ a set $C_j^i$ of candidate parents $(\lvert C_j^i\lvert  \leq k)$  
 
 $\quad$// maximize step  
 $\quad$find network $B_i$ maximizing score among networks where $\forall X_j,  Parents(X_j) \subseteq C_j^i$  
@@ -308,13 +308,13 @@ To identify candidate parents in the first iteration, can compute the mutual inf
 **Kullback-Leibler (KL) divergence** provides a distance measure between two distributions, $P$ and $Q$  
 
 $$
-D_{KL}(P(X)||Q(X)) = \sum_xP(x)\log\frac{P(x)}{Q(x)}
+D_{KL}(P(X)\lvert Q(X)) = \sum_xP(x)\log\frac{P(x)}{Q(x)}
 $$
 
 KL divergence can be used to assess the discrepancy between the network’s $P_{net}(X, Y)$ and the empirical $P(X, Y)$.  
 
 $$
-M(X,Y) = D_{KL}(P(X,Y)||P_{net}(X,Y))
+M(X,Y) = D_{KL}(P(X,Y)\lvert P_{net}(X,Y))
 $$
 
 Notice, $P_{net}(X,Y)$ can be estimated through sampling from the network.  
@@ -327,7 +327,7 @@ for each variable $X_j$
 {  
 $\quad$ calculate $M(X_j,X_l)$ for all $X_j \neq X_l$  such that $X_l \notin Parents(X_j)$  
 
-$\quad$ choose highest ranking $X_l, \cdots X_{k-s}$ where $s=|Parents(X_j)|$  
+$\quad$ choose highest ranking $X_l, \cdots X_{k-s}$ where $s=\lvert Parents(X_j)\lvert$  
 
 $\quad$ // include current parents in candidate set to ensure monotonic  
 $\quad$ // improvement in scoring function  
@@ -347,27 +347,27 @@ Previously discussed method are mainly unsupervised. However, BN learning can be
 **Naive Bayes**  
 Learning:  
 *   Estimate $P(Y = y)$ for each value of the class variable $Y$  
-*   Estimate $P(X_i=x | Y = y)$ for each $X_i$  
+*   Estimate $P(X_i=x \lvert  Y = y)$ for each $X_i$  
 
 Classification: use Bayes' Rule  
 
 $$
 \begin{aligned}
-P(Y = y|x) &= \frac{P(y)P(x|y)}{\sum_{y'}P(x|y')} \\
-&= \frac{P(y)\prod_{i=1}^nP(x_i|y)}{\sum_{y'}(P(y')\prod_{i=1}^nP(x_i|y'))}
+P(Y = y\lvert x) &= \frac{P(y)P(x\lvert y)}{\sum_{y'}P(x\lvert y')} \\
+&= \frac{P(y)\prod_{i=1}^nP(x_i\lvert y)}{\sum_{y'}(P(y')\prod_{i=1}^nP(x_i\lvert y'))}
 \end{aligned}
 $$
 
 **The Tree Augmented Network (TAN) algorithm**  
 *   Learns a tree structure to augment the edges of a naïve Bayes network.  
 *   Algorithm:  
-    1.   Compute weight $I(X_i,X_j|Y)$ for each possible edge $(X_i,X_j)$ between features  
+    1.   Compute weight $I(X_i,X_j\lvert Y)$ for each possible edge $(X_i,X_j)$ between features  
     2.   Find maximum weight spanning tree (MST) for graph over $X_l ... X_n$  
     3.   Assign edge direction in MST    
     4.   Construct a TAN model by adding node for $Y$ and an edge from $Y$ to each $X_i$  
 *   Condition mutual information  
     $$
-    I(X_i,X_j|Y) = \sum_{x_i\in X_i}\sum_{x_j\in X_j}\sum_{y\in Y}P(x_i, x_j, y)\log_2\frac{P(x_i,x_j|y)}{P(x_i|y)P(x_j|y)}
+    I(X_i,X_j\lvert Y) = \sum_{x_i\in X_i}\sum_{x_j\in X_j}\sum_{y\in Y}P(x_i, x_j, y)\log_2\frac{P(x_i,x_j\lvert y)}{P(x_i\lvert y)P(x_j\lvert y)}
     $$
 
 **Tan Network Example**  
