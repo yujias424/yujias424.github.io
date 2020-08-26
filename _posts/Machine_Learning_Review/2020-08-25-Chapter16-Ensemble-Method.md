@@ -18,34 +18,35 @@ mathjax: true
   * choosing different subsamples of the training set (bagging)
   * using different probability distributions over the training instances (boosting, skewing)
   * choosing different features and subsamples (random forests)
-  
- #### Bagging (Bootstrap Aggregation)
- * Algorithm:
-   * Learning:
-     * Given: 
-       Learner $L$, training set $D = \{(x_1,y_1) \ldots (x_m,y_m)\}$
-     * Action:
-       for $i \leftarrow 1$ to $T$:  
-       $\quad\quad$ $D^{(i)} \leftarrow m$ instances randomly drawn <u>with replacement</u> from $D$.  
-       $\quad\quad$ $h_i \leftarrow$ model learned using $L$ on $D^{(i)}$
-   * Predition:
-     * Classification:
-       * Given:
-         Test instance $x$
-       * Action:
-         predict $y \leftarrow$ plurality_vote($h_1(x), \ldots h_T(x)$)
-     * Regression:
-       * Given:
-         Test instance $x_t$
-       * Action:
-         predict $y \leftarrow$ plurality_vote($h_1(x), \ldots h_T(x)$)
- * Comments
-   * each sampled training set is a bootstrap replicate
-     * contains m instances (the same as the original training set)
-     * on average it includes 63.2% of the original training set
-     * some instances appear multiple times
-   * can be used with any base learner
-   * works best with <u>*unstable*</u> learning methods: those for which small changes in D result in relatively large changes in learned models, i.e., those that tend to **overfit** training data.
+
+#### Bagging 
+**(Bootstrap Aggregation)**  
+* Algorithm:
+  * Learning:
+    * Given: 
+      Learner $L$, training set $D = \{(x_1,y_1) \ldots (x_m,y_m)\}$
+    * Action:
+      for $i \leftarrow 1$ to $T$:  
+      $\quad\quad$ $D^{(i)} \leftarrow m$ instances randomly drawn <u>with replacement</u> from $D$.  
+      $\quad\quad$ $h_i \leftarrow$ model learned using $L$ on $D^{(i)}$
+  * Predition:
+    * Classification:
+      * Given:
+        Test instance $x$
+      * Action:
+        predict $y \leftarrow$ plurality_vote($h_1(x), \ldots h_T(x)$)
+    * Regression:
+      * Given:
+        Test instance $x_t$
+      * Action:
+        predict $y \leftarrow$ plurality_vote($h_1(x), \ldots h_T(x)$)
+* Comments
+  * each sampled training set is a bootstrap replicate
+    * contains m instances (the same as the original training set)
+    * on average it includes 63.2% of the original training set
+    * some instances appear multiple times
+  * can be used with any base learner
+  * works best with *<u>unstable</u>* learning methods: those for which small changes in D result in relatively large changes in learned models, i.e., those that tend to **overfit** training data.
 
 #### Boosting
 * Intuition
