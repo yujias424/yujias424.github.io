@@ -60,14 +60,14 @@ To be noticed, the $p(\theta)$ in MAP is the prior distribution.
 
 **Example: MLE of Exponential Distribution**  
 
-*   First write the log-likelihood of the sample, that is
+*   First write the log-likelihood of the sample, that is  
     $$
     \begin{aligned}
     \mathcal{l}(\lambda) &= \sum_{i=1}^N\log f(x^{(i)})\\
     &= N\log(\lambda) - \lambda \sum_{i=1}^N x^{(i)}
     \end{aligned}
     $$
-*   Compute first derivative, set to zero, solve for $\lambda$.
+*   Compute first derivative, set to zero, solve for $\lambda$.  
     $$
     \begin{aligned}
     \frac{\partial\mathcal{l}(\lambda)}{\partial\lambda} &= \frac{N}{\lambda} - \sum_{i=1}^N x^{(i)} = 0 \\

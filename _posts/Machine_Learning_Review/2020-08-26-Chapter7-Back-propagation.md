@@ -41,20 +41,20 @@ A multilayer perceptron can represent XOR.
     *   Output layer  
     
 **Typical activation function**  
-*   Threshold function   
+*   Threshold function  
     $$t(z) = \mathbb{1}[z\geq 0]$$
-*   Sigmoid function
+*   Sigmoid function  
     $$\sigma = \frac{1}{1+e^{-z}}$$
-*   Tanh function
+*   Tanh function  
     $$\tanh(z) = 2\sigma(2z)-1$$
-*   ReLU function
-    *   Standard ReLU
+*   ReLU function  
+    *   Standard ReLU 
         $$ReLU(z) = max\{z,0\}$$
-    *   Generalization of ReLU
+    *   Generalization of ReLU  
         $$gReLU(z) = max\{z,0\} + \alpha\min\{z,0\}$$
-        *   Leaky-ReLU function
+        *   Leaky-ReLU function  
             $$Leaky-ReLU(z) = max\{z,0\} + 0.01\min\{z,0\}$$
-        *   Parametric-ReLU function
+        *   Parametric-ReLU function  
             $\alpha$ is learnable.
             
 ##### Backpropagation
@@ -75,8 +75,11 @@ Gradient descent is an iterative process aimed at finding a minimum in the error
 
 *<u>Mathematics Representation</u>*  
 1.  Calculate the gradient of $E$  
-    $$\nabla E(w) = [\frac{\partial E}{\partial w_0}, \frac{\partial E}{\partial w_1}, \cdots, \frac{\partial E}{\partial w_n}]$$  
+   
+    $$\nabla E(w) = [\frac{\partial E}{\partial w_0}, \frac{\partial E}{\partial w_1}, \cdots, \frac{\partial E}{\partial w_n}]$$
+
 2.  Take a step in the opposite direction  
+
     $$
     \begin{aligned}
         &\Delta w=-\eta \nabla E(w) \\
@@ -149,11 +152,13 @@ $$
 $$
 
 **Batch case and Online case**  
-*   Batch case
+*   Batch case  
+
     $$
     \frac{\partial E}{\partial w_i} = \frac{\partial}{\partial w_i}\frac{1}{2}\sum_{d\in D}(o^{(d)}-y^{(d)})^2
     $$
-*   Online case
+*   Online case 
+
     $$
     \frac{\partial E}{\partial w_i} = \frac{\partial}{\partial w_i}\frac{1}{2}(o^{(d)}-y^{(d)})^2
     $$
@@ -168,7 +173,8 @@ $net_j$: input value of perceptron j.
 
 **Algorithm**  
 
-*   We first notice that each weight is changed by 
+*   We first notice that each weight is changed by  
+
     $$
     \begin{aligned}
         \Delta w_{ji} &= -\eta \frac{\partial E}{\partial w_{ji}} \\
@@ -176,17 +182,21 @@ $net_j$: input value of perceptron j.
         &= -\eta\frac{\partial E}{\partial net_j}o_i
     \end{aligned}
     $$
+
     *   Notice that $o_i$ can be replaced by $x_i$ if $i$ is an input perceptron. Recall that $net(w_i) = w_0 + \sum_{i=1}^n w_ix_i$, $\frac{\partial net_j}{\partial w_{i}} = x_i$.
     *   For easy understanding, we use $\delta_j$ to denote $\frac{\partial E}{\partial net_j}$, that is $\delta_j =\frac{\partial E}{\partial net_j}$ 
 *   Next we want to calculate the $\delta_j$, there are two situations, where j is an output perceptron or not.
     *   j is an output perceptron.
+
         $$
         \begin{aligned}
             \delta_j &= \frac{\partial E}{\partial o_j}\frac{\partial o_j}{\partial net_j}\\
             &= \frac{\partial o_j}{\partial net_j}(o_j-y_j)
         \end{aligned}
         $$
-    *   j is a hidden perceptron.
+
+    *   j is a hidden perceptron.  
+
         $$
         \begin{aligned}
             \delta_j &=  \frac{\partial o_j}{\partial net_j}\sum_k \delta_k w_{kj}
@@ -199,6 +209,7 @@ $net_j$: input value of perceptron j.
 2.  For each Training Image:  
     1.  Compute Activation for the Entire Network.  
     2.  Compute $\delta = \frac{\partial E}{\partial net_j}$ for Neurons in the Output Layer using Network Activaion and Desired Activation. 
+
         $$
         \begin{aligned}
             \delta_j^{(L)} 
@@ -207,7 +218,9 @@ $net_j$: input value of perceptron j.
                 &= \frac{\partial o_j}{\partial net_j}(o_j-y_j)
         \end{aligned}
         $$
+
     3.  Compute $\delta = \frac{\partial E}{\partial net_j}$ for all Neurons in the previous Layers (Hidden Perceptron). To be noticed, $l+1$ denotes the previous layer of layer $l$. $k$ denotes the $k$th percepton in a single layer $l$.
+
         $$
         \begin{aligned}
             \delta_j^{(l)} 
@@ -215,28 +228,34 @@ $net_j$: input value of perceptron j.
                 &=  \frac{\partial o_j}{\partial net_j}\sum_k \delta_k^{l+1} w_{kj}^{l+1}
         \end{aligned}
         $$
-    4.  Compute Gradient of Cost w.r.t each Weight and Bias for the Training Image using $\delta$
+
+    4.  Compute Gradient of Cost w.r.t each Weight and Bias for the Training Image using $\delta$  
+
         $$
         \begin{aligned}
         \frac{\partial E}{\partial w_{jk}^{(l)}} &=  \frac{\partial E}{\partial net_j}\frac{\partial net_j}{\partial w_{jk}^{(l)}} \\
         &= \delta_j^{(l)}o_k^{(l-1)}
         \end{aligned}
         $$
-        
+
         $$
         \begin{aligned}
         \frac{\partial E}{\partial b_{j}^{(l)}} &=  \frac{\partial E}{\partial net_j}\frac{\partial net_j}{\partial b_{j}^{(l)}} \\
         &= \delta_j^{(l)} \cdot 1 = \delta_j^{(l)}
         \end{aligned}
         $$
+
 3.  Average the Gradient w.r.t. each Weight and Bias over the Entire Training Set (Assume total $n$ samples).
+
     $$
     \begin{aligned}
         &\frac{\partial E}{\partial w_{jk}^{(l)}} =  \frac{1}{n}\sum\frac{\partial E}{\partial w_{jk}^{(l)}}\\
         &\frac{\partial E}{\partial b_{j}^{(l)}} =  \frac{1}{n}\sum\frac{\partial E}{\partial b_{j}^{(l)}}
     \end{aligned}
     $$
+
 4.  Update the Weights and Biases using Gradient Descent.
+
     $$
     \begin{aligned}
         w_{jk}^{(l)} &= w_{jk}^{(l)} + \Delta w_{jk}^{(l)} \\
@@ -250,6 +269,7 @@ $net_j$: input value of perceptron j.
         &= b_{j}^{(l)} + (-\eta \frac{\partial E}{\partial b_{j}^{(l)}})
     \end{aligned}
     $$
+
 5.  Repeat Steps 2-4 till Cost reduces below an acceptable level (Convergence)
      
     
