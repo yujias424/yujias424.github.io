@@ -1,5 +1,5 @@
 ---
-title: Naive Bayes and Probabilit Graphical Model Intro
+title: Naive Bayes and Probability Graphical Model Intro
 tags: Machine_Learning
 mathjax: true
 ---
