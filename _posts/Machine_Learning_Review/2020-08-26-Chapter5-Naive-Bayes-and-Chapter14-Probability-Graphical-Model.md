@@ -1,6 +1,6 @@
 ---
 title: Naive Bayes and Probability Graphical Model Intro
-tags: Machine_Learning
+tags: Machine Learning Review
 mathjax: true
 ---
 
