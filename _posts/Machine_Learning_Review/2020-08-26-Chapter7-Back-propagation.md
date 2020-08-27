@@ -1,6 +1,6 @@
 ---
 title: Back Propagation
-tags: Machine Learning Review
+tags: Machine-Learning-Review
 mathjax: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Decision Tree
-tags: Machine Learning Review
+tags: Machine-Learning-Review
 mathjax: true
 ---
 

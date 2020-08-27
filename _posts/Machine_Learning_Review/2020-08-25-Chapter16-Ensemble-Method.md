@@ -1,6 +1,6 @@
 ---
 title: Ensemble Method
-tags: Machine Learning Review
+tags: Machine-Learning-Review
 mathjax: true
 ---
 
