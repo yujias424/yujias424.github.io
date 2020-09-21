@@ -39,7 +39,7 @@ author:
   url       : https://yujias424.github.io
   avatar    : https://en.gravatar.com/userimage/130726013/33eeba61f8a1796a03427f16568c9d6b?size=200 # path or url of avatar image (square)
   bio       : A Naive Ph.D.
-  email     : yj.shi@link.cuhk.edu.hk
+  email     : # yj.shi@link.cuhk.edu.hk
   facebook  : # "user_name" the last part of your profile url, e.g. https://www.facebook.com/user_name
   twitter   : # "user_name" the last part of your profile url, e.g. https://twitter.com/user_name
   weibo     : # "user_id"   the last part of your profile url, e.g. https://www.weibo.com/user_id/profile?...
@@ -208,7 +208,7 @@ defaults:
     values:
       layout: article
       sharing: true
-      license: true
+      license: false
       aside:
         toc: true
       show_edit_on_github: true
