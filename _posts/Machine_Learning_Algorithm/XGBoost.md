@@ -118,14 +118,14 @@ mathjax: true
         $\quad H_{kv}\leftarrow = \sum_{j\in \{j \lvert s_{k,v} \geq x_{jk} > s_{k,v-1}\}}h_j$
         **end**  
 *   Sparsity-aware Split Finding
-    *   **Algorithm 3**: Sparsity-aware Split Finding
+    *   **Algorithm 3**: Sparsity-aware Split Finding  
         **Input**: $I$, instance set of current node  
         **Input**: $I_k = \{i\in I\lvert x_{ik} \neq missing\}$  
         **Input**: $d$, feature dimension  
         Also applies to the approximate setting, only collect statistics of non-missing entries into buckets gain $\leftarrow 0$.  
         $G \leftarrow \sum_{i\in I}, g_i, H\leftarrow \sum_{i\in I}h_i$  
         **for** $k=1$ **to** $m$ **do**  
-        $\quad$ // enumerate missing value goto right
+        $\quad$// enumerate missing value goto right
         $G_L\leftarrow 0, H_L\leftarrow 0$  
         $\quad$**for** $j\,\,in\,\,sorted(I_k,\,\,ascent\,\,order\,\,by\,\,x_{jk})$ **do**
         $\qquad G_L\leftarrow G_L+g_j, \,H_l\leftarrow H_L + h_j$  
