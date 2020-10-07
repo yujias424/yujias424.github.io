@@ -116,7 +116,7 @@ Subset of the training set that is held aside
 
 **Regression Trees**  
 **Overview**  
-Leaves have functions that predict numeric values instead of class labels.
+Leaves have functions that predict numeric values instead of class labels, or say, Decision trees where the target variable can take continuous values (typically real numbers) are called regression trees.
 
 **CART**
 
