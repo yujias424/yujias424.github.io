@@ -1,6 +1,6 @@
 ---
 title: Regularization
-tags: Machine-Learning-Review
+tags: ML-Review
 mathjax: true
 ---
 
