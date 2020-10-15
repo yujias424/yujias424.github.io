@@ -1,6 +1,6 @@
 ---
 title: SHapley Additive exPlanations (SHAP)
-tags: Machine-Learning-Evaluation
+tags: ML-Evaluation
 mathjax: true
 ---
 
